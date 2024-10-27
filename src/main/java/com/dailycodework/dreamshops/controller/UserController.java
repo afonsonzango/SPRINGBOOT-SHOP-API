@@ -26,7 +26,7 @@ public class UserController {
         try {
             User user = userService.getUserById(userId);
             UserDto userDto = userService.convertUserToDto(user);
-            return ResponseEntity.ok(new ApiResponse("Success", userDto));
+            return ResponseEntity.ok(new ApiResponse("sucesso", userDto));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
         }
@@ -37,7 +37,7 @@ public class UserController {
         try {
             User user = userService.createUser(request);
             UserDto userDto = userService.convertUserToDto(user);
-            return ResponseEntity.ok(new ApiResponse("Create User Success!", userDto));
+            return ResponseEntity.ok(new ApiResponse("Usuario criado com sucesso!", userDto));
         } catch (AlreadyExistsException e) {
             return ResponseEntity.status(CONFLICT).body(new ApiResponse(e.getMessage(), null));
         }
@@ -47,7 +47,7 @@ public class UserController {
         try {
             User user = userService.updateUser(request, userId);
             UserDto userDto = userService.convertUserToDto(user);
-            return ResponseEntity.ok(new ApiResponse("Update User Success!", userDto));
+            return ResponseEntity.ok(new ApiResponse("Usuario actualizado com sucesso!", userDto));
         } catch (ResourceNotFoundException e) {
            return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
         }
@@ -56,7 +56,7 @@ public class UserController {
     public ResponseEntity<ApiResponse> deleteUser(@PathVariable Long userId) {
         try {
             userService.deleteUser(userId);
-            return ResponseEntity.ok(new ApiResponse("Delete User Success!", null));
+            return ResponseEntity.ok(new ApiResponse("Usuario deletado com sucesso!", null));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
         }

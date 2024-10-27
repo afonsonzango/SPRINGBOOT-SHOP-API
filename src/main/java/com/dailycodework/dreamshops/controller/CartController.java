@@ -36,7 +36,7 @@ public class CartController {
         try {
             Cart cart = cartService.getCartByUserId(userId);
             CartDto cartDto = cartService.convertToDto(cart);
-            return ResponseEntity.ok(new ApiResponse("Success", cartDto));
+            return ResponseEntity.ok(new ApiResponse("Sucesso", cartDto));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
         }
@@ -46,7 +46,7 @@ public class CartController {
     public ResponseEntity<ApiResponse> clearCart( @PathVariable Long cartId) {
         try {
             cartService.clearCart(cartId);
-            return ResponseEntity.ok(new ApiResponse("Clear Cart Success!", null));
+            return ResponseEntity.ok(new ApiResponse("Carrinho limpo com sucesso!", null));
         } catch (ResourceNotFoundException e) {
           return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
         }
@@ -56,7 +56,7 @@ public class CartController {
     public ResponseEntity<ApiResponse> getTotalAmount( @PathVariable Long cartId) {
         try {
             BigDecimal totalPrice = cartService.getTotalPrice(cartId);
-            return ResponseEntity.ok(new ApiResponse("Total Price", totalPrice));
+            return ResponseEntity.ok(new ApiResponse("Preco total", totalPrice));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
         }

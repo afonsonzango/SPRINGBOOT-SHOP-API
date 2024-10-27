@@ -28,9 +28,9 @@ public class OrderController {
         try {
             Order order =  orderService.placeOrder(userId);
             OrderDto orderDto =  orderService.convertToDto(order);
-            return ResponseEntity.ok(new ApiResponse("Items Order Success!", orderDto));
+            return ResponseEntity.ok(new ApiResponse("Item ecomnendado com sucesso!", orderDto));
         } catch (Exception e) {
-            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("Error occurred!", e.getMessage()));
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("Ocorreu um erro!", e.getMessage()));
         }
     }
 
@@ -48,7 +48,7 @@ public class OrderController {
     public ResponseEntity<ApiResponse> getUserOrders(@PathVariable Long userId) {
         try {
             List<OrderDto> order = orderService.getUserOrders(userId);
-            return ResponseEntity.ok(new ApiResponse("Item Order Success!", order));
+            return ResponseEntity.ok(new ApiResponse("Item encomendado com sucesso!", order));
         } catch (ResourceNotFoundException e) {
             return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("Oops!", e.getMessage()));
         }
@@ -57,10 +57,10 @@ public class OrderController {
     @PostMapping("/payment/create-payment-intent")
     public ResponseEntity<String> createPaymentIntent(@RequestBody PaymentInfo paymentInfo) throws StripeException {
         try {
-            System.out.println("The body :" +paymentInfo);
+            System.out.println("O corpo:" +paymentInfo);
             PaymentIntent paymentIntent = paymentService.createPaymentIntent(paymentInfo);
             String paymentString = paymentIntent.toJson();
-            System.out.println("The payment string :" + paymentString);
+            System.out.println("String do pagamento:" + paymentString);
             return ResponseEntity.ok(paymentString);
         } catch (StripeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

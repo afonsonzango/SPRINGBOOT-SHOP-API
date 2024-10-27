@@ -32,7 +32,7 @@ public class CartItemController {
                User user = userService.getAuthenticatedUser();
               Cart cart= cartService.initializeNewCart(user);
             cartItemService.addItemToCart(cart.getId(), productId, quantity);
-            return ResponseEntity.ok(new ApiResponse("Item added to cart successfully", null));
+            return ResponseEntity.ok(new ApiResponse("Item adicionado ao carrinho com sucesso", null));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
         }catch (JwtException e){
@@ -44,7 +44,7 @@ public class CartItemController {
     public ResponseEntity<ApiResponse> removeItemFromCart(@PathVariable Long cartId, @PathVariable Long itemId) {
         try {
             cartItemService.removeItemFromCart(cartId, itemId);
-            return ResponseEntity.ok(new ApiResponse("Remove Item Success", null));
+            return ResponseEntity.ok(new ApiResponse("Item removido com sucesso", null));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
         }
@@ -56,7 +56,7 @@ public class CartItemController {
                                                            @RequestParam Integer quantity) {
         try {
             cartItemService.updateItemQuantity(cartId, itemId, quantity);
-            return ResponseEntity.ok(new ApiResponse("Update Item Success", null));
+            return ResponseEntity.ok(new ApiResponse("Item actualizado com sucesso", null));
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
         }
